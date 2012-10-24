@@ -2,7 +2,8 @@
 RUN $includepath;
 
 %DEFAULT time 60
-%DEFAULT field 'user-agent'
+%DEFAULT field 'via'
+--%DEFAULT field 'user-agent'
 --%DEFAULT field 'set-cookie'
 
 http_conversations = LOAD '$pcap' USING com.packetloop.packetpig.loaders.pcap.protocol.HTTPConversationLoader('$field', '$tcppath') AS (
@@ -30,6 +31,8 @@ uniq_src  = foreach src_http {
                    uniq_src_field = distinct http_conversations.field;
                    generate group, COUNT(uniq_src_field);
 };
+
+STORE uniq_src INTO '$output/http_source';
 
 -- Find the countries
 countries = foreach http_conversations GENERATE com.packetloop.packetpig.udf.geoip.Country(src) as country;
