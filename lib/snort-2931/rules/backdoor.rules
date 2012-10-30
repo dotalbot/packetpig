@@ -1,0 +1,57 @@
+# Copyright 2001-2012 Sourcefire Inc. All Rights Reserved.
+#
+# This file may contain proprietary rules that were created, tested and
+# certified by Sourcefire, Inc. (the "VRT Certified Rules") as well as
+# rules that were created by Sourcefire and other third parties and
+# distributed under the GNU General Public License (the "GPL Rules").  The
+# VRT Certified Rules contained in this file are the property of
+# Sourcefire, Inc. Copyright 2012 Sourcefire, Inc. All Rights Reserved.
+# The GPL Rules created by Sourcefire, Inc. are the property of
+# Sourcefire, Inc. Copyright 2002-2012 Sourcefire, Inc. All Rights
+# Reserved.  All other GPL Rules are owned and copyrighted by their
+# respective owners (please see www.snort.org/contributors for a list of
+# owners and their respective copyrights).  In order to determine what
+# rules are VRT Certified Rules or GPL Rules, please refer to the VRT
+# Certified Rules License Agreement.
+#
+#----------------
+# BACKDOOR RULES
+#----------------
+#
+
+
+
+
+
+
+
+# 3150, 4120
+
+
+
+
+
+
+
+
+
+
+
+
+# NOTES: this string should be within the first 3 bytes of the connection
+
+
+
+
+
+
+
+
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - chmod"; flow:established,to_server; content:"act=chmod&"; fast_pattern:only; http_uri; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:18688; rev:3;)
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - processes"; flow:established,to_server; content:"act=processes&"; fast_pattern:only; http_uri; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:18690; rev:3;)
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - update"; flow:established,to_server; content:"act=update&"; fast_pattern:only; http_uri; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:18687; rev:3;)
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - tools"; flow:established,to_server; content:"act=tools&"; fast_pattern:only; http_uri; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:18686; rev:3;)
+
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - processes"; flow:established,to_server; content:"act=processes&"; fast_pattern:only; http_client_body; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:22936; rev:1;)
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - chmod"; flow:established,to_server; content:"act=chmod&"; fast_pattern:only; http_client_body; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:22935; rev:1;)
+# alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"BACKDOOR c99shell.php command request - update"; flow:established,to_server; content:"act=update&"; fast_pattern:only; http_client_body; metadata:policy security-ips drop, service http; reference:url,vil.nai.com/vil/content/v_136948.htm; classtype:policy-violation; sid:22934; rev:1;)

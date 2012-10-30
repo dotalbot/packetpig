@@ -1,0 +1,122 @@
+# Copyright 2001-2012 Sourcefire Inc. All Rights Reserved.
+#
+# This file may contain proprietary rules that were created, tested and
+# certified by Sourcefire, Inc. (the "VRT Certified Rules") as well as
+# rules that were created by Sourcefire and other third parties and
+# distributed under the GNU General Public License (the "GPL Rules").  The
+# VRT Certified Rules contained in this file are the property of
+# Sourcefire, Inc. Copyright 2012 Sourcefire, Inc. All Rights Reserved.
+# The GPL Rules created by Sourcefire, Inc. are the property of
+# Sourcefire, Inc. Copyright 2002-2012 Sourcefire, Inc. All Rights
+# Reserved.  All other GPL Rules are owned and copyrighted by their
+# respective owners (please see www.snort.org/contributors for a list of
+# owners and their respective copyrights).  In order to determine what
+# rules are VRT Certified Rules or GPL Rules, please refer to the VRT
+# Certified Rules License Agreement.
+#
+#-----------------
+# ICMP-INFO RULES
+#-----------------
+#
+# Description:
+# These rules are standard ICMP traffic.  They include OS pings, as well
+# as normal routing done by ICMP.  There are a number of "catch all" rules
+# that will alert on unknown ICMP types.
+#
+# Potentially "BAD" ICMP rules are included in icmp.rules
+
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IRDP router advertisement"; itype:9; reference:bugtraq,578; reference:cve,1999-0875; classtype:misc-activity; sid:363; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IRDP router selection"; itype:10; reference:bugtraq,578; reference:cve,1999-0875; classtype:misc-activity; sid:364; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING *NIX"; itype:8; content:"|10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F|"; depth:32; classtype:misc-activity; sid:366; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING BSDtype"; itype:8; content:"|08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17|"; depth:32; classtype:misc-activity; sid:368; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING BayRS Router"; itype:8; content:"|01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F|"; depth:32; classtype:misc-activity; sid:369; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING BeOS4.x"; itype:8; content:"|00 00 00 00 00 00 00 00 00 00 00 00 08 09 0A 0B|"; depth:32; classtype:misc-activity; sid:370; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Cisco Type.x"; itype:8; content:"|AB CD AB CD AB CD AB CD AB CD AB CD AB CD AB CD|"; depth:32; classtype:misc-activity; sid:371; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Delphi-Piette Windows"; itype:8; content:"Pinging from Del"; depth:32; classtype:misc-activity; sid:372; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Flowpoint2200 or Network Management Software"; itype:8; content:"|01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10|"; depth:32; classtype:misc-activity; sid:373; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING IP NetMonitor Macintosh"; itype:8; content:"|A9| Sustainable So"; depth:32; classtype:misc-activity; sid:374; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING LINUX/*BSD"; dsize:8; id:13170; itype:8; classtype:misc-activity; sid:375; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Microsoft Windows"; itype:8; content:"0123456789abcdefghijklmnop"; depth:32; classtype:misc-activity; sid:376; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Network Toolbox 3 Windows"; itype:8; content:"================"; depth:32; classtype:misc-activity; sid:377; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Ping-O-MeterWindows"; itype:8; content:"OMeterObeseArmad"; depth:32; classtype:misc-activity; sid:378; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Pinger Windows"; itype:8; content:"Data|00 00 00 00 00 00 00 00 00 00 00 00|"; depth:32; classtype:misc-activity; sid:379; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Seer Windows"; itype:8; content:"|88 04|              "; depth:32; classtype:misc-activity; sid:380; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Oracle Solaris"; dsize:8; itype:8; classtype:misc-activity; sid:381; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING Windows"; itype:8; content:"abcdefghijklmnop"; depth:16; classtype:misc-activity; sid:382; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO traceroute"; itype:8; ttl:1; classtype:attempted-recon; sid:385; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING"; icode:0; itype:8; classtype:misc-activity; sid:384; rev:6;)
+# alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"ICMP-INFO Address Mask Reply"; icode:0; itype:18; classtype:misc-activity; sid:386; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Address Mask Reply undefined code"; icode:>0; itype:18; classtype:misc-activity; sid:387; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Address Mask Request"; icode:0; itype:17; classtype:misc-activity; sid:388; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Address Mask Request undefined code"; icode:>0; itype:17; classtype:misc-activity; sid:389; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Alternate Host Address"; icode:0; itype:6; classtype:misc-activity; sid:390; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Alternate Host Address undefined code"; icode:>0; itype:6; classtype:misc-activity; sid:391; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Datagram Conversion Error"; icode:0; itype:31; classtype:misc-activity; sid:392; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Datagram Conversion Error undefined code"; icode:>0; itype:31; classtype:misc-activity; sid:393; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Destination Host Unknown"; icode:7; itype:3; classtype:misc-activity; sid:394; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Destination Network Unknown"; icode:6; itype:3; classtype:misc-activity; sid:395; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Fragmentation Needed and DF bit was set"; icode:4; itype:3; reference:cve,2004-0790; reference:cve,2005-0068; classtype:misc-activity; sid:396; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Host Precedence Violation"; icode:14; itype:3; classtype:misc-activity; sid:397; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Host Unreachable for Type of Service"; icode:12; itype:3; classtype:misc-activity; sid:398; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Host Unreachable"; icode:1; itype:3; classtype:misc-activity; sid:399; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Network Unreachable for Type of Service"; icode:11; itype:3; classtype:misc-activity; sid:400; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Network Unreachable"; icode:0; itype:3; classtype:misc-activity; sid:401; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Port Unreachable"; icode:3; itype:3; reference:cve,2004-0790; reference:cve,2005-0068; classtype:misc-activity; sid:402; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Precedence Cutoff in effect"; icode:15; itype:3; classtype:misc-activity; sid:403; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Protocol Unreachable"; icode:2; itype:3; reference:cve,2004-0790; reference:cve,2005-0068; classtype:misc-activity; sid:404; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Source Host Isolated"; icode:8; itype:3; classtype:misc-activity; sid:405; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable Source Route Failed"; icode:5; itype:3; classtype:misc-activity; sid:406; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Destination Unreachable cndefined code"; icode:>15; itype:3; classtype:misc-activity; sid:407; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Echo Reply"; icode:0; itype:0; classtype:misc-activity; sid:408; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Echo Reply undefined code"; icode:>0; itype:0; classtype:misc-activity; sid:409; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Fragment Reassembly Time Exceeded"; icode:1; itype:11; classtype:misc-activity; sid:410; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IPV6 I-Am-Here"; icode:0; itype:34; classtype:misc-activity; sid:411; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IPV6 I-Am-Here undefined code"; icode:>0; itype:34; classtype:misc-activity; sid:412; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IPV6 Where-Are-You"; icode:0; itype:33; classtype:misc-activity; sid:413; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO IPV6 Where-Are-You undefined code"; icode:>0; itype:33; classtype:misc-activity; sid:414; rev:8;)
+# alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"ICMP-INFO Information Reply"; icode:0; itype:16; classtype:misc-activity; sid:415; rev:6;)
+# alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"ICMP-INFO Information Reply undefined code"; icode:>0; itype:16; classtype:misc-activity; sid:416; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Information Request"; icode:0; itype:15; classtype:misc-activity; sid:417; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Information Request undefined code"; icode:>0; itype:15; classtype:misc-activity; sid:418; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Host Redirect"; icode:0; itype:32; classtype:misc-activity; sid:419; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Host Redirect undefined code"; icode:>0; itype:32; classtype:misc-activity; sid:420; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Registration Reply"; icode:0; itype:36; classtype:misc-activity; sid:421; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Registration Reply undefined code"; icode:>0; itype:36; classtype:misc-activity; sid:422; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Registration Request"; icode:0; itype:35; classtype:misc-activity; sid:423; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Mobile Registration Request undefined code"; icode:>0; itype:35; classtype:misc-activity; sid:424; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Parameter Problem Bad Length"; icode:2; itype:12; classtype:misc-activity; sid:425; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Parameter Problem Missing a Required Option"; icode:1; itype:12; classtype:misc-activity; sid:426; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Parameter Problem Unspecified Error"; icode:0; itype:12; classtype:misc-activity; sid:427; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Parameter Problem undefined Code"; icode:>2; itype:12; classtype:misc-activity; sid:428; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Photuris Reserved"; icode:0; itype:40; classtype:misc-activity; sid:429; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Photuris Unknown Security Parameters Index"; icode:1; itype:40; classtype:misc-activity; sid:430; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Photuris Valid Security Parameters, But Authentication Failed"; icode:2; itype:40; classtype:misc-activity; sid:431; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Photuris Valid Security Parameters, But Decryption Failed"; icode:3; itype:40; classtype:misc-activity; sid:432; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Photuris undefined code!"; icode:>3; itype:40; classtype:misc-activity; sid:433; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Redirect for TOS and Host"; icode:3; itype:5; reference:cve,1999-0265; classtype:misc-activity; sid:436; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Redirect for TOS and Network"; icode:2; itype:5; reference:cve,1999-0265; classtype:misc-activity; sid:437; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Redirect undefined code"; icode:>3; itype:5; reference:cve,1999-0265; classtype:misc-activity; sid:438; rev:11;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Reserved for Security Type 19"; icode:0; itype:19; classtype:misc-activity; sid:439; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Reserved for Security Type 19 undefined code"; icode:>0; itype:19; classtype:misc-activity; sid:440; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Router Advertisement"; icode:0; itype:9; classtype:misc-activity; sid:441; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Router Selection"; icode:0; itype:10; classtype:misc-activity; sid:443; rev:7;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO SKIP"; icode:0; itype:39; classtype:misc-activity; sid:445; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO SKIP undefined code"; icode:>0; itype:39; classtype:misc-activity; sid:446; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Source Quench undefined code"; icode:>0; itype:4; classtype:misc-activity; sid:448; rev:8;)
+# alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"ICMP-INFO Time-To-Live Exceeded in Transit"; icode:0; itype:11; classtype:misc-activity; sid:449; rev:7;)
+# alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"ICMP-INFO Time-To-Live Exceeded in Transit undefined code"; icode:>1; itype:11; classtype:misc-activity; sid:450; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Timestamp Reply"; icode:0; itype:14; classtype:misc-activity; sid:451; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Timestamp Reply undefined code"; icode:>0; itype:14; classtype:misc-activity; sid:452; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Timestamp Request"; icode:0; itype:13; classtype:misc-activity; sid:453; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Timestamp Request undefined code"; icode:>0; itype:13; classtype:misc-activity; sid:454; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Traceroute"; icode:0; itype:30; classtype:misc-activity; sid:456; rev:6;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO Traceroute undefined code"; icode:>0; itype:30; classtype:misc-activity; sid:457; rev:8;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 1"; icode:0; itype:1; metadata:policy security-ips drop; classtype:misc-activity; sid:458; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 1 undefined code"; itype:1; metadata:policy security-ips drop; classtype:misc-activity; sid:459; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 2"; icode:0; itype:2; metadata:policy security-ips drop; classtype:misc-activity; sid:460; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 2 undefined code"; itype:2; metadata:policy security-ips drop; classtype:misc-activity; sid:461; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 7"; icode:0; itype:7; metadata:policy security-ips drop; classtype:misc-activity; sid:462; rev:9;)
+alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO unassigned type 7 undefined code"; itype:7; metadata:policy balanced-ips drop, policy connectivity-ips drop, policy security-ips drop; reference:cve,1999-0454; classtype:misc-activity; sid:463; rev:11;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO PING undefined code"; icode:>0; itype:8; classtype:misc-activity; sid:365; rev:9;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO ICMPv6 Echo Reply"; icode:0; itype:129; classtype:misc-activity; sid:18473; rev:2;)
+# alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg:"ICMP-INFO ICMPv6 Echo Request"; icode:0; itype:128; classtype:misc-activity; sid:18474; rev:2;)
